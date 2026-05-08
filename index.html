@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BlueWord ㅣ Loss Adjustment English Reports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Archivo:wght@300;400;500;600;700;800;900&family=Archivo+Narrow:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0e1a;
+    --ink-2:#1a1f33;
+    --mute:#6b7280;
+    --line:#e6e8ee;
+    --paper:#f5f4ef;
+    --bw-navy:#073762;
+    --bw-accent:#1d4ed8;
+    --bw-gold:#b08d57;
+    --bg:#ffffff;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --display: "Archivo", -apple-system, sans-serif;
+    --kor: "Pretendard", -apple-system, "Apple SD Gothic Neo", sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--bg);color:var(--ink);font-family:var(--kor);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+  ::selection{background:var(--ink);color:#fff;}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 48px;
+    color:#fff;
+    transition:background .35s ease, color .35s ease, border-color .35s ease, padding .25s ease, box-shadow .25s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:#ffffff;color:var(--ink);
+    border-bottom:1px solid var(--line);
+    padding:14px 48px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800;letter-spacing:.01em;font-size:21px;}
+  .brand .mark{
+    width:28px;height:28px;border-radius:6px;background:#fff;color:var(--bw-navy);
+    display:grid;place-items:center;font-weight:900;font-size:13px;letter-spacing:0;
+    transition:background .3s, color .3s;
+  }
+  .nav.scrolled .brand .mark{background:var(--bw-navy);color:#fff;}
+  .brand small{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-left:2px;}
+
+  .nav-menu{display:flex;gap:36px;list-style:none;font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;}
+  .nav-menu li{position:relative;padding:6px 0;}
+  .nav-menu a{display:inline-block;padding:6px 0;}
+  .nav-menu li:hover .submenu{opacity:1;visibility:visible;transform:translateY(0);}
+  .submenu{
+    position:absolute;top:100%;left:-16px;min-width:220px;list-style:none;
+    background:#fff;color:var(--ink);
+    padding:14px 18px;
+    border:1px solid var(--line);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.18);
+    opacity:0;visibility:hidden;transform:translateY(8px);
+    transition:opacity .2s, transform .2s, visibility .2s;
+    text-transform:none;letter-spacing:0;font-weight:500;font-size:13px;
+    font-family:var(--kor);
+  }
+  .submenu li{padding:6px 0;}
+  .submenu a:hover{color:var(--bw-accent);}
+
+  .nav-right{display:flex;align-items:center;gap:18px;font-family:var(--display);font-size:12px;letter-spacing:.14em;}
+  .lang{display:flex;align-items:center;gap:8px;}
+  .lang button{padding:4px 2px;opacity:.6;font-weight:600;}
+  .lang button.active{opacity:1;}
+  .lang .sep{opacity:.4;}
+  .quote-cta{
+    padding:11px 22px;border:1px solid currentColor;border-radius:999px;
+    font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.16em;
+    transition:all .25s;
+  }
+  .quote-cta:hover{background:#fff;color:var(--bw-navy);border-color:#fff;}
+  .nav.scrolled .quote-cta:hover{background:var(--bw-navy);color:#fff;border-color:var(--bw-navy);}
+
+
+  /* ===== Brand logo ===== */
+  .brand-logo{height:36px;width:auto;display:block;border-radius:4px;transition:height .25s;}
+  .nav.scrolled .brand-logo{height:32px;}
+  .nav .brand small{color:rgba(255,255,255,.75);}
+  .nav.scrolled .brand small{color:var(--mute);}
+  .foot-logo{height:42px;width:auto;display:block;}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;min-height:100vh;overflow:hidden;color:#fff;
+    background:#073762;
+    padding:140px 48px 80px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(29,78,216,.35), transparent 50%),
+      radial-gradient(ellipse at 100% 100%, rgba(176,141,87,.18), transparent 50%),
+      linear-gradient(180deg, #073762 0%, #041f3a 100%);
+  }
+  .hero-bg::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background-image:url("https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=2400&q=80"), url("https://images.unsplash.com/photo-1473073898421-bc6d9d894ddf?w=2400&q=80");
+    background-size:cover, cover;background-position:center, center;background-blend-mode:screen;opacity:.28;mix-blend-mode:luminosity;
+  }
+
+  .hero-top{
+    position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;
+    font-family:var(--display);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:rgba(255,255,255,.55);
+  }
+  .hero-top .crumbs{display:flex;gap:14px;align-items:center;}
+  .hero-top .crumbs span{display:flex;align-items:center;gap:14px;}
+  .hero-top .crumbs span::after{content:"";width:24px;height:1px;background:rgba(255,255,255,.3);}
+  .hero-top .crumbs span:last-child::after{display:none;}
+  .hero-top .crumbs em{font-family:var(--display);font-style:normal;font-weight:500;color:rgba(255,255,255,.85);text-transform:none;font-size:14px;letter-spacing:0;}
+
+  .hero-main{position:relative;z-index:2;max-width:1400px;}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:10px 18px;border:1px solid rgba(255,255,255,.18);border-radius:999px;
+    font-family:var(--display);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:rgba(255,255,255,.85);background:rgba(255,255,255,.04);backdrop-filter:blur(10px);
+    margin-bottom:36px;
+  }
+  .hero-eyebrow .pulse{
+    width:7px;height:7px;border-radius:50%;background:#22c55e;
+    box-shadow:0 0 0 0 rgba(34,197,94,.6);
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(34,197,94,.5);}
+    70%{box-shadow:0 0 0 12px rgba(34,197,94,0);}
+    100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}
+  }
+
+  .hero-title{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:clamp(48px, 7.4vw, 116px);
+    line-height:.98;
+    letter-spacing:-0.035em;
+    max-width:1300px;
+  }
+  .hero-title b{font-weight:800;}
+  .hero-title em{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;color:#cbd5e1;}
+  .hero-title .accent{
+    background:linear-gradient(90deg, #93c5fd 0%, #fff 60%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:800;
+  }
+
+  .hero-sub{
+    margin-top:40px;max-width:680px;
+    font-family:var(--kor);font-weight:400;font-size:18px;line-height:1.7;
+    color:rgba(255,255,255,.78);
+  }
+  .hero-sub b{color:#fff;font-weight:600;}
+
+  .hero-actions{display:flex;gap:14px;margin-top:48px;flex-wrap:wrap;}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:18px 32px;background:#fff;color:var(--bw-navy);border-radius:999px;
+    font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    transition:all .25s;
+  }
+  .btn-primary:hover{background:var(--bw-accent);color:#fff;transform:translateY(-2px);}
+  .btn-primary .arrow{transition:transform .25s;}
+  .btn-primary:hover .arrow{transform:translateX(6px);}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:18px 32px;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;
+    font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    transition:all .25s;
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:#fff;}
+
+  .hero-bottom{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    margin-top:80px;padding-top:36px;
+    border-top:1px solid rgba(255,255,255,.12);
+  }
+  .hb-stat{padding-right:24px;border-right:1px solid rgba(255,255,255,.12);}
+  .hb-stat:last-child{border-right:0;}
+  .hb-stat .num{
+    font-family:var(--display);font-weight:300;font-size:48px;line-height:1;letter-spacing:-0.03em;
+    color:#fff;
+  }
+  .hb-stat .num b{font-weight:700;}
+  .hb-stat .num .unit{font-size:18px;font-weight:400;color:rgba(255,255,255,.6);margin-left:4px;}
+  .hb-stat .lbl{
+    font-family:var(--display);font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+    color:rgba(255,255,255,.55);margin-top:14px;
+  }
+  .hb-stat .lbl em{font-family:var(--display);font-style:normal;font-weight:500;color:rgba(255,255,255,.85);font-size:13px;letter-spacing:0;text-transform:none;display:block;margin-top:4px;}
+
+  /* ============ SECTION CHROME ============ */
+  section{position:relative;}
+  .section-pad{padding:140px 48px;}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-bottom:80px;flex-wrap:wrap;}
+  .section-tag{
+    font-family:var(--display);font-size:12px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--mute);display:flex;align-items:center;gap:14px;
+  }
+  .section-tag .bar{width:36px;height:1px;background:var(--mute);}
+  .section-title{
+    font-family:var(--display);font-weight:300;
+    font-size:clamp(40px, 5.2vw, 72px);
+    line-height:1.05;letter-spacing:-0.03em;
+    margin-top:18px;max-width:1000px;
+  }
+  .section-title b{font-weight:800;}
+  .section-title em{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;color:var(--bw-accent);}
+  .section-desc{
+    color:var(--mute);max-width:420px;font-size:15px;line-height:1.75;
+  }
+
+  /* ============ VALUE PROPS — 4 PILLARS ============ */
+  .pillars{background:#fff;}
+  .pillar-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  .pillar{
+    padding:48px 36px 56px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    position:relative;
+    transition:background .3s;
+    min-height:380px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .pillar:hover{background:var(--paper);}
+  .pillar .pnum{
+    font-family:var(--display);font-style:normal;font-weight:500;font-size:46px;color:var(--bw-accent);
+    line-height:1;
+  }
+  .pillar .picon{
+    width:56px;height:56px;border-radius:14px;
+    background:linear-gradient(135deg, #eaf0ff, #fff);
+    border:1px solid var(--line);
+    display:grid;place-items:center;color:var(--bw-navy);
+    margin-top:30px;margin-bottom:30px;
+  }
+  .pillar h3{
+    font-family:var(--kor);font-weight:700;font-size:22px;line-height:1.35;letter-spacing:-0.01em;color:var(--ink);
+  }
+  .pillar h3 .en{
+    display:block;font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--bw-accent);margin-bottom:10px;
+  }
+  .pillar p{
+    margin-top:14px;color:var(--mute);font-size:14px;line-height:1.7;
+  }
+  .pillar .pmark{
+    margin-top:24px;display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--display);font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+    color:var(--bw-navy);
+  }
+  .pillar .pmark .dot{width:6px;height:6px;border-radius:50%;background:var(--bw-gold);}
+
+  /* ============ PRICING / MARKETPLACE BAND ============ */
+  .price-band{
+    background:var(--bw-navy);color:#fff;padding:120px 48px;
+    overflow:hidden;position:relative;
+  }
+  .price-band::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse at 70% 50%, black 0%, transparent 80%);
+  }
+  .price-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+  .price-band .section-tag{color:rgba(255,255,255,.6);}
+  .price-band .section-tag .bar{background:rgba(255,255,255,.6);}
+  .price-band h2{
+    font-family:var(--display);font-weight:300;font-size:clamp(38px, 5vw, 64px);
+    line-height:1.05;letter-spacing:-0.03em;margin-top:18px;
+  }
+  .price-band h2 b{font-weight:800;}
+  .price-band h2 em{font-family:var(--display);font-style:normal;font-weight:500;color:#fbbf24;}
+  .price-band p.lead{color:rgba(255,255,255,.75);font-size:16px;line-height:1.8;margin-top:30px;max-width:540px;}
+
+  .price-card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:24px;padding:40px;
+    backdrop-filter:blur(10px);
+    position:relative;overflow:hidden;
+  }
+  .price-card::before{
+    content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:1px;
+    background:linear-gradient(90deg, transparent, #93c5fd, transparent);
+  }
+  .price-card .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 12px;background:rgba(251,191,36,.15);color:#fbbf24;
+    border-radius:999px;font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .price-card h3{
+    font-family:var(--display);font-weight:300;font-size:42px;line-height:1.1;letter-spacing:-0.02em;
+  }
+  .price-card h3 b{font-weight:800;color:#fbbf24;}
+  .price-card .basis{margin-top:14px;color:rgba(255,255,255,.65);font-size:14px;}
+  .price-list{margin-top:32px;display:flex;flex-direction:column;gap:14px;}
+  .price-list li{
+    list-style:none;display:flex;gap:14px;align-items:flex-start;
+    padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:14px;color:rgba(255,255,255,.85);line-height:1.6;
+  }
+  .price-list li:last-child{border-bottom:0;}
+  .price-list .check{
+    width:22px;height:22px;border-radius:50%;background:rgba(34,197,94,.15);color:#4ade80;
+    display:grid;place-items:center;flex-shrink:0;margin-top:1px;
+  }
+  .price-list strong{color:#fff;font-weight:600;}
+
+  /* ============ PROCESS ============ */
+  .process{background:var(--paper);}
+  .process-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    margin-top:40px;
+  }
+  .pstep{
+    padding:36px 28px 36px 0;border-right:1px solid var(--line);
+    position:relative;
+  }
+  .pstep:last-child{border-right:0;}
+  .pstep .pday{
+    font-family:var(--display);font-style:normal;font-weight:500;font-size:13px;color:var(--bw-accent);margin-bottom:8px;
+  }
+  .pstep .pn{
+    font-family:var(--display);font-weight:300;font-size:64px;line-height:1;letter-spacing:-0.04em;color:var(--ink);
+    display:flex;align-items:baseline;gap:6px;
+  }
+  .pstep .pn b{font-weight:700;}
+  .pstep .pn small{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;font-size:18px;color:var(--mute);}
+  .pstep h4{
+    margin-top:24px;font-family:var(--kor);font-weight:700;font-size:18px;letter-spacing:-0.01em;color:var(--ink);
+  }
+  .pstep p{margin-top:10px;color:var(--mute);font-size:13px;line-height:1.7;max-width:240px;}
+
+  .timeline{
+    margin-top:60px;padding:32px 36px;background:#fff;border:1px solid var(--line);border-radius:18px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .timeline .tlbl{font-family:var(--display);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute);font-weight:700;}
+  .timeline .tval{font-family:var(--display);font-weight:700;font-size:18px;color:var(--bw-navy);letter-spacing:-0.01em;}
+  .timeline .tval em{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;color:var(--bw-accent);}
+  .timeline .sep{width:1px;height:32px;background:var(--line);}
+
+  /* ============ EXPERTISE ============ */
+  .expertise{background:#fff;}
+  .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .exp-visual{
+    position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;
+    background:linear-gradient(135deg, #0a1f44, #1d4ed8);
+  }
+  .exp-visual img{
+    width:100%;height:100%;object-fit:cover;opacity:.7;mix-blend-mode:luminosity;
+  }
+  .exp-visual .floating{
+    position:absolute;background:#fff;border-radius:14px;padding:18px 22px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.3);
+    font-family:var(--kor);
+  }
+  .floating-1{top:36px;left:36px;}
+  .floating-1 .l{font-family:var(--display);font-size:10px;letter-spacing:.25em;color:var(--mute);text-transform:uppercase;}
+  .floating-1 .v{font-family:var(--display);font-weight:800;font-size:22px;color:var(--bw-navy);margin-top:4px;letter-spacing:-0.01em;}
+  .floating-2{bottom:36px;right:36px;display:flex;align-items:center;gap:14px;}
+  .floating-2 .av{
+    width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0a1f44);
+    display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:700;font-size:13px;
+  }
+  .floating-2 .nm{font-weight:700;font-size:14px;color:var(--ink);}
+  .floating-2 .role{font-size:11px;color:var(--mute);margin-top:2px;}
+
+  .exp-copy h2{font-family:var(--display);font-weight:300;font-size:clamp(36px, 4.6vw, 60px);line-height:1.05;letter-spacing:-0.03em;}
+  .exp-copy h2 b{font-weight:800;}
+  .exp-copy h2 em{font-family:var(--display);font-style:normal;font-weight:500;color:var(--bw-accent);}
+  .exp-copy p{margin-top:24px;color:var(--mute);font-size:15px;line-height:1.85;max-width:520px;}
+  .exp-list{margin-top:36px;display:flex;flex-direction:column;gap:16px;}
+  .exp-item{display:flex;gap:18px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--line);}
+  .exp-item:last-child{border-bottom:1px solid var(--line);}
+  .exp-item .ico{
+    width:42px;height:42px;border-radius:10px;background:#eaf0ff;color:var(--bw-navy);
+    display:grid;place-items:center;flex-shrink:0;
+  }
+  .exp-item h5{font-family:var(--kor);font-weight:700;font-size:15px;color:var(--ink);}
+  .exp-item p{margin:6px 0 0;font-size:13px;line-height:1.6;color:var(--mute);}
+
+  /* ============ VISUAL BAND ============ */
+  .visband{position:relative;height:520px;overflow:hidden;background:#0a0e1a;}
+  .visband-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+  .visband-grid .vbi{position:relative;overflow:hidden;}
+  .visband-grid .vbi img{width:100%;height:100%;object-fit:cover;opacity:.55;transition:opacity .6s, transform 1.2s ease;}
+  .visband-grid .vbi:hover img{opacity:.9;transform:scale(1.05);}
+  .visband-grid .vbi::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%, rgba(5,8,22,.85));}
+  .visband-grid .vbi .lab{
+    position:absolute;left:28px;bottom:24px;color:#fff;z-index:2;
+    font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-0.01em;
+  }
+  .visband-grid .vbi .lab small{display:block;font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;font-size:12px;color:#cbd5e1;margin-bottom:6px;letter-spacing:0;text-transform:none;}
+  .visband-grid .vbi .lab b{display:block;font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#93c5fd;margin-bottom:8px;}
+  .visband-cap{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;text-align:center;color:#fff;
+    font-family:var(--display);font-weight:300;font-size:clamp(28px,3.6vw,52px);line-height:1.15;letter-spacing:-0.025em;
+    background:rgba(5,8,22,.5);backdrop-filter:blur(8px);padding:36px 48px;border:1px solid rgba(255,255,255,.12);border-radius:18px;
+    max-width:780px;
+  }
+  .visband-cap em{font-family:var(--display);font-style:normal;font-weight:500;color:#fbbf24;}
+  .visband-cap b{font-weight:800;}
+  @media (max-width:900px){.visband{height:auto;}.visband-grid{position:relative;grid-template-columns:1fr;}.visband-grid .vbi{height:240px;}.visband-cap{position:relative;top:auto;left:auto;transform:none;margin:24px;}}
+
+  /* ============ DELIVERABLES ============ */
+  .deliver{background:var(--ink);color:#fff;padding:140px 48px;}
+  .deliver .section-tag{color:rgba(255,255,255,.6);}
+  .deliver .section-tag .bar{background:rgba(255,255,255,.6);}
+  .deliver .section-title{color:#fff;}
+  .deliver .section-title em{color:#fbbf24;}
+  .deliver-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .dcard{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    border-radius:18px;padding:36px;transition:all .3s;
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .dcard:hover{background:rgba(255,255,255,.07);transform:translateY(-4px);border-color:rgba(255,255,255,.2);}
+  .dcard .doc-thumb{
+    aspect-ratio:1.4/1;background:#fff;border-radius:10px;
+    padding:20px;color:var(--ink);font-size:9px;font-family:var(--display);
+    overflow:hidden;position:relative;line-height:1.4;
+  }
+  .dcard .doc-thumb .dh{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    border-bottom:2px solid var(--bw-navy);padding-bottom:6px;margin-bottom:8px;
+  }
+  .dcard .doc-thumb .dh strong{font-weight:800;color:var(--bw-navy);font-size:10px;letter-spacing:.1em;}
+  .dcard .doc-thumb .dh span{font-size:8px;color:var(--mute);}
+  .dcard .doc-thumb .dl{height:4px;background:#eaeaea;margin:5px 0;border-radius:2px;}
+  .dcard .doc-thumb .dl.s{width:75%;}
+  .dcard .doc-thumb .dl.m{width:90%;}
+  .dcard .doc-thumb .dl.l{width:100%;}
+  .dcard .doc-thumb .dimg{height:38px;background:linear-gradient(135deg,#cbd5e1,#94a3b8);border-radius:4px;margin:8px 0;}
+  .dcard h3{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#93c5fd;}
+  .dcard h4{font-family:var(--kor);font-weight:700;font-size:20px;line-height:1.4;}
+  .dcard p{color:rgba(255,255,255,.65);font-size:13px;line-height:1.7;}
+  .dcard .meta{
+    margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);
+    display:flex;justify-content:space-between;
+    font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);
+  }
+  .dcard .meta b{color:#fff;}
+
+  /* ============ TRUST / CLIENTS ============ */
+  .trust{background:#fff;padding:100px 48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .trust-head{
+    text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--mute);
+    margin-bottom:40px;
+  }
+  .trust-head em{font-family:var(--display);font-style:normal;font-weight:500;color:var(--ink);text-transform:none;font-size:14px;letter-spacing:0;display:block;margin-top:8px;font-weight:500;}
+  .logo-row{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:8px;
+    border-top:1px solid var(--line);
+  }
+  .logo-cell{
+    aspect-ratio:2.6/1;display:grid;place-items:center;
+    border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.04em;color:#94a3b8;
+    transition:color .25s, background .25s;
+  }
+  .logo-cell:last-child{border-right:0;}
+  .logo-cell:hover{color:var(--bw-navy);background:var(--paper);}
+  .logo-cell .dl{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;font-size:18px;color:#cbd5e1;}
+
+  /* ============ TESTIMONIAL ============ */
+  .testi{background:var(--paper);padding:140px 48px;}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .tcard{
+    background:#fff;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:24px;
+    border:1px solid var(--line);
+  }
+  .tcard .tquote{
+    font-family:var(--display);font-style:normal;font-weight:500;font-size:22px;line-height:1.5;color:var(--ink);letter-spacing:-0.01em;
+  }
+  .tcard .tquote::before{
+    content:"“";display:block;font-size:64px;color:var(--bw-accent);line-height:.5;margin-bottom:12px;font-style:normal;
+  }
+  .tcard .tmeta{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line);}
+  .tcard .tav{
+    width:42px;height:42px;border-radius:50%;
+    background:linear-gradient(135deg,#1d4ed8,#0a1f44);color:#fff;
+    display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:14px;
+  }
+  .tcard .tnm{font-weight:700;font-size:14px;color:var(--ink);}
+  .tcard .trole{font-size:12px;color:var(--mute);margin-top:2px;}
+  .tcard .tstars{margin-left:auto;color:#fbbf24;font-size:13px;letter-spacing:2px;}
+
+  /* ============ FAQ ============ */
+  .faq{background:#fff;padding:140px 48px;}
+  .faq-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:flex-start;}
+  .faq-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;display:flex;align-items:center;gap:24px;padding:28px 0;
+    font-family:var(--kor);font-weight:600;font-size:17px;color:var(--ink);text-align:left;letter-spacing:-0.01em;
+  }
+  .faq-q .qno{font-family:var(--display);font-style:normal;font-weight:500;color:var(--bw-accent);font-size:20px;flex-shrink:0;}
+  .faq-q .qmark{margin-left:auto;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:all .25s;flex-shrink:0;}
+  .faq-item.open .qmark{background:var(--ink);color:#fff;border-color:var(--ink);transform:rotate(45deg);}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .35s ease;
+    color:var(--mute);font-size:14px;line-height:1.8;
+  }
+  .faq-a div{padding:0 0 28px 44px;max-width:680px;}
+  .faq-item.open .faq-a{max-height:300px;}
+
+  /* ============ CTA ============ */
+  .cta{position:relative;padding:160px 48px;color:#fff;overflow:hidden;background:#041f3a;}
+  .cta::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 80% 100%, rgba(29,78,216,.4), transparent 50%),
+      radial-gradient(ellipse at 0% 0%, rgba(176,141,87,.18), transparent 60%);
+  }
+  .cta::after{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+  .cta-inner{position:relative;z-index:2;max-width:1200px;}
+  .cta h2{font-family:var(--display);font-weight:300;font-size:clamp(40px,5.6vw,84px);line-height:1.05;letter-spacing:-0.035em;}
+  .cta h2 b{font-weight:800;}
+  .cta h2 em{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;color:#93c5fd;}
+  .cta h3{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;font-size:clamp(20px,2.2vw,28px);margin-top:24px;color:rgba(255,255,255,.85);}
+  .cta-actions{display:flex;gap:14px;margin-top:48px;flex-wrap:wrap;}
+  .cta-actions .btn-primary{background:#fbbf24;color:var(--bw-navy);}
+  .cta-actions .btn-primary:hover{background:#fff;color:var(--bw-navy);}
+
+  .cta-strip{
+    margin-top:80px;padding:32px 36px;background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);border-radius:18px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative;z-index:2;
+  }
+  .cta-strip .csi h5{font-family:var(--display);font-size:11px;letter-spacing:.25em;color:rgba(255,255,255,.5);text-transform:uppercase;font-weight:600;margin-bottom:8px;}
+  .cta-strip .csi p{font-family:var(--display);font-weight:600;font-size:18px;color:#fff;letter-spacing:-0.01em;}
+  .cta-strip .csi p em{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;color:#cbd5e1;}
+
+  /* ============ FOOTER ============ */
+  footer{background:#03182d;color:rgba(255,255,255,.65);padding:80px 48px 36px;font-size:13px;}
+  .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .foot-top h5{font-family:var(--display);font-size:11px;letter-spacing:.3em;color:rgba(255,255,255,.45);text-transform:uppercase;margin-bottom:20px;font-weight:700;}
+  .foot-top ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .foot-top a:hover{color:#fff;}
+  .foot-brand{display:flex;align-items:center;gap:12px;color:#fff;font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.01em;margin-bottom:24px;}
+  .foot-brand .mark{width:32px;height:32px;border-radius:8px;background:#fff;color:var(--bw-navy);display:grid;place-items:center;font-weight:900;font-size:14px;}
+  .foot-brand small{font-family:var(--display);font-style:normal;font-weight:500;font-weight:400;font-size:15px;opacity:.7;}
+  .foot-addr{line-height:1.85;color:rgba(255,255,255,.55);max-width:380px;}
+  .foot-addr strong{color:#fff;font-weight:600;display:block;margin-bottom:8px;}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:30px;font-size:12px;color:rgba(255,255,255,.4);flex-wrap:wrap;gap:16px;}
+  .foot-bottom .legal{display:flex;gap:24px;}
+  .foot-bottom .legal a{color:rgba(255,255,255,.55);}
+  .foot-bottom .legal a:hover{color:#fff;}
+
+  /* ============ Reveal animations ============ */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ============ Responsive ============ */
+  @media (max-width: 1100px){
+    .nav, .section-pad, .hero, .price-band, .deliver, .testi, .faq, .cta, footer{padding-left:28px;padding-right:28px;}
+    .nav-menu{display:none;}
+    .pillar-grid, .process-grid{grid-template-columns:repeat(2,1fr);}
+    .pstep{border-right:0;border-bottom:1px solid var(--line);padding-bottom:36px;}
+    .price-grid, .exp-grid{grid-template-columns:1fr;gap:48px;}
+    .deliver-grid, .testi-grid{grid-template-columns:1fr;}
+    .faq-grid{grid-template-columns:1fr;gap:40px;}
+    .hero-bottom{grid-template-columns:repeat(2,1fr);gap:32px 0;}
+    .hb-stat:nth-child(2){border-right:0;}
+    .logo-row{grid-template-columns:repeat(3,1fr);}
+    .foot-top{grid-template-columns:1fr 1fr;}
+    .cta-strip{grid-template-columns:1fr;}
+  }
+  @media (max-width: 640px){
+    .pillar-grid, .process-grid, .hero-bottom{grid-template-columns:1fr;}
+    .pillar{border-right:0;}
+    .hb-stat{border-right:0;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:20px;}
+    .logo-row{grid-template-columns:repeat(2,1fr);}
+    .foot-top{grid-template-columns:1fr;}
+    .timeline{flex-direction:column;align-items:flex-start;}
+    .timeline .sep{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav" data-screen-label="Nav">
+  <a href="#" class="brand" aria-label="Blueword home">
+    <img src="assets/blueword-logo.png" alt="BlueWord" class="brand-logo"/>
+    <small>since 2021</small>
+  </a>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="#services">SERVICES</a>
+        <ul class="submenu">
+          <li><a href="#">손해사정 영문 보고서</a></li>
+          <li><a href="#">중간 종결 보고서</a></li>
+          <li><a href="#">긴급 보고서 (Fast Track)</a></li>
+          <li><a href="#">보고서 내 이미지 번역</a></li>
+          <li><a href="#">재보험사 컴플레인 대응</a></li>
+        </ul>
+      </li>
+      <li><a href="#process">PROCESS</a></li>
+      <li><a href="#expertise">EXPERTISE</a></li>
+      <li><a href="#deliverables">DELIVERABLES</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </nav>
+  <div class="nav-right">
+    <div class="lang">
+      <button class="active">KOR</button>
+      <span class="sep">/</span>
+      <button>ENG</button>
+    </div>
+    <a href="#contact" class="quote-cta">GET A QUOTE</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" data-screen-label="01 Hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-top">
+    <div class="crumbs">
+      <span>BlueWord ／ <em>Loss Adjustment Reports</em></span>
+      <span>SEOUL · KOR</span>
+    </div>
+    <div>EST. 2021 · TRUSTED BY GLOBAL REINSURERS</div>
+  </div>
+
+  <div class="hero-main">
+    <div class="hero-eyebrow">
+      <span class="pulse"></span>
+      <span>NOW ACCEPTING NEW CASES · 평균 7일 회신</span>
+    </div>
+
+    <h1 class="hero-title">
+      손해사정 <em>영문 보고서</em>는<br/>
+      <b>BlueWord</b><span class="accent">와 함께.</span>
+    </h1>
+
+    <p class="hero-sub">
+      항공우주공학 &amp; 보험 전공 전문가의 <b>2차 검수</b>를 거친 영문 손해사정 보고서.
+      <br/>시장 최저가 보장과 평균 7일의 신속한 작업으로,
+      <b>3년간 재보험사 컴플레인 0건</b>의 신뢰를 만들어 갑니다.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        REQUEST A REPORT
+        <span class="arrow">
+          <svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h20M16 1l5 4-5 4"/></svg>
+        </span>
+      </a>
+      <a href="#process" class="btn-ghost">
+        SEE OUR PROCESS
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hb-stat">
+      <div class="num"><b>0</b><span class="unit">CASES</span></div>
+      <div class="lbl">REINSURER COMPLAINTS<em>최근 3년 누적</em></div>
+    </div>
+    <div class="hb-stat">
+      <div class="num"><b>7</b><span class="unit">DAYS</span></div>
+      <div class="lbl">AVERAGE TURNAROUND<em>접수 후 평균 회신</em></div>
+    </div>
+    <div class="hb-stat">
+      <div class="num"><b>3</b><span class="unit">DAYS</span></div>
+      <div class="lbl">FAST TRACK FEEDBACK<em>긴급 보고서 한정</em></div>
+    </div>
+    <div class="hb-stat">
+      <div class="num"><b>10K</b><span class="unit">CHARS</span></div>
+      <div class="lbl">MARKET-LOWEST RATE<em>10,000 자 기준 보장</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 PILLARS ============ -->
+<section class="pillars section-pad" id="services" data-screen-label="02 Pillars">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-tag"><span class="bar"></span><span>WHY BlueWord</span></div>
+      <h2 class="section-title"><b>4 가지 약속</b>으로<br/>완성하는 <em>영문 보고서</em></h2>
+    </div>
+    <p class="section-desc">
+      합리적인 가격, 검증된 전문성, 편리한 워크플로우, 그리고 신속한 납기.
+      손해사정 영문 보고서가 갖춰야 할 네 가지 핵심 가치를 블루워드가 모두 책임집니다.
+    </p>
+  </div>
+
+  <div class="pillar-grid reveal">
+    <div class="pillar">
+      <div>
+        <div class="pnum">01.</div>
+        <div class="picon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
+        </div>
+        <h3><span class="en">REASONABLE PRICE</span>합리적인 가격</h3>
+        <p>10,000 자 기준 <strong>시장 최저가 보장</strong>. 동일사고의 현장 중간 종결 보고서 요청 시 <strong>추가 할인 혜택</strong>까지 제공합니다.</p>
+      </div>
+      <div class="pmark"><span class="dot"></span>BEST PRICE GUARANTEED</div>
+    </div>
+
+    <div class="pillar">
+      <div>
+        <div class="pnum">02.</div>
+        <div class="picon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L3 7l9 5 9-5-9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg>
+        </div>
+        <h3><span class="en">PROFESSIONAL EXPERTISE</span>전문성</h3>
+        <p>호주 <strong>항공우주공학 &amp; 기계공학</strong>, 그리고 <strong>보험학</strong> 전공 전문가가 <strong>2차 검수</strong>를 진행합니다. 3년간 재보험사 컴플레인 <strong>0건</strong>.</p>
+      </div>
+      <div class="pmark"><span class="dot"></span>DUAL-REVIEW PROTOCOL</div>
+    </div>
+
+    <div class="pillar">
+      <div>
+        <div class="pnum">03.</div>
+        <div class="picon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        </div>
+        <h3><span class="en">CONVENIENCE</span>편리함</h3>
+        <p>한글 보고서와 <strong>동일한 편집 작업</strong>을 그대로 유지합니다. 필요시 보고서 내 <strong>첨부 이미지의 한글까지 영문으로 번역</strong>해 드립니다.</p>
+      </div>
+      <div class="pmark"><span class="dot"></span>FORMAT-PRESERVED</div>
+    </div>
+
+    <div class="pillar">
+      <div>
+        <div class="pnum">04.</div>
+        <div class="picon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3><span class="en">SPEED</span>신속성</h3>
+        <p>접수 후 <strong>평균 7일 이내</strong> 작업 완료. 긴급 건은 <strong>2일 내 1차 피드백</strong> 가능. 마감을 지키는 약속, 가장 중요한 가치 중 하나입니다.</p>
+      </div>
+      <div class="pmark"><span class="dot"></span>FAST TRACK · 48H</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="price-band" data-screen-label="03 Pricing">
+  <div class="price-grid">
+    <div class="reveal">
+      <div class="section-tag"><span class="bar"></span><span>MARKET-LOWEST PRICING</span></div>
+      <h2><b>업계 최저가</b>를<br/>먼저 <em>약속</em>합니다.</h2>
+      <p class="lead">
+        같은 사고에서 발생한 <strong style="color:#fff;">중간 종결 보고서</strong>를 함께 의뢰하시면 추가 할인이 적용됩니다.
+        대량/장기 의뢰사를 위한 별도 단가 협의도 가능합니다 — 견적은 24시간 이내 회신.
+      </p>
+      <div style="display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;">
+        <a href="#contact" class="btn-primary" style="background:#fbbf24;color:var(--bw-navy);">REQUEST QUOTE</a>
+        <a href="#" class="btn-ghost">DOWNLOAD RATE CARD</a>
+      </div>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="badge">⚡ MARKET LOWEST</div>
+      <h3>업계 <b>최저가 견적</b></h3>
+      <div class="basis">한글 원문 10,000자 기준 · VAT 별도</div>
+      <ul class="price-list">
+        <li><span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+          <div><strong>시장 최저가 보장</strong> — 타 견적 대비 동일 조건 시 그 가격에 맞춰드립니다</div></li>
+        <li><span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+          <div><strong>중간 종결 보고서 동시 의뢰 시</strong> 추가 할인 적용</div></li>
+        <li><span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+          <div>2차 검수 비용 <strong>전액 포함</strong> — 별도 추가 청구 없음</div></li>
+        <li><span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+          <div>장기 계약사 단가 협의 · <strong>분기 정산</strong> 가능</div></li>
+        <li><span class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg></span>
+          <div>이미지 한글 번역 <strong>옵션 추가</strong> 가능</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process section-pad" id="process" data-screen-label="04 Process">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-tag"><span class="bar"></span><span>OUR PROCESS</span></div>
+      <h2 class="section-title">접수에서 납품까지<br/><b>평균 7일</b>의 <em>워크플로우</em></h2>
+    </div>
+    <p class="section-desc">
+      모든 케이스는 동일한 4단계 프로세스를 거칩니다. 단순 번역이 아닌, 보험 실무와 공학적 검증이
+      결합된 검수 파이프라인이 블루워드 보고서의 품질을 보장합니다.
+    </p>
+  </div>
+
+  <div class="process-grid reveal">
+    <div class="pstep">
+      <div class="pday">DAY 0–1</div>
+      <div class="pn"><b>01</b><small>·intake</small></div>
+      <h4>접수 &amp; 케이스 분석</h4>
+      <p>한글 원문 보고서와 첨부 자료 접수, 사고 유형·청구 구조 파악, 24시간 이내 견적 회신 및 일정 확정.</p>
+    </div>
+    <div class="pstep">
+      <div class="pday">DAY 1–4</div>
+      <div class="pn"><b>02</b><small>·draft</small></div>
+      <h4>1차 영문 작성</h4>
+      <p>실무 손해사정사가 한글 원문의 편집 구조를 그대로 유지하며 영문 본문 작성. 첨부 이미지의 한글 영역도 함께 처리.</p>
+    </div>
+    <div class="pstep">
+      <div class="pday">DAY 4–6</div>
+      <div class="pn"><b>03</b><small>·review</small></div>
+      <h4>전문가 2차 검수</h4>
+      <p>항공우주·기계공학 / 보험학 전공자가 기술 용어, 인과관계 기술, 면·부책 표현을 재보험사 관점에서 재검수.</p>
+    </div>
+    <div class="pstep">
+      <div class="pday">DAY 6–7</div>
+      <div class="pn"><b>04</b><small>·delivery</small></div>
+      <h4>최종 납품 &amp; 사후 대응</h4>
+      <p>최종본 송부, 클라이언트 피드백 1회 무상 반영, 재보험사 추가 문의 발생 시 후속 대응까지 책임집니다.</p>
+    </div>
+  </div>
+
+  <div class="timeline reveal">
+    <div>
+      <div class="tlbl">STANDARD</div>
+      <div class="tval">접수 후 <em>평균 7일</em> 이내</div>
+    </div>
+    <div class="sep"></div>
+    <div>
+      <div class="tlbl">RUSH</div>
+      <div class="tval">긴급 건 <em>2일 내</em> 1차 피드백</div>
+    </div>
+    <div class="sep"></div>
+    <div>
+      <div class="tlbl">REVISIONS</div>
+      <div class="tval"><em>1회</em> 무상 수정 포함</div>
+    </div>
+    <div class="sep"></div>
+    <div>
+      <div class="tlbl">SUPPORT</div>
+      <div class="tval">재보험사 문의 <em>후속 대응</em></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERTISE ============ -->
+<section class="expertise section-pad" id="expertise" data-screen-label="05 Expertise">
+  <div class="exp-grid">
+    <div class="exp-visual reveal">
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=1400&q=80" alt="산업 기계 손상 조사 현장"/>
+      <div class="floating floating-1">
+        <div class="l">REINSURER COMPLAINTS</div>
+        <div class="v">0 <span style="font-size:13px;color:var(--mute);">CASES · 36 MONTHS</span></div>
+      </div>
+      <div class="floating floating-2">
+        <div class="av">PhD</div>
+        <div>
+          <div class="nm">2차 검수 전담</div>
+          <div class="role">항공우주·기계공학 / 보험학</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-copy reveal">
+      <div class="section-tag" style="margin-bottom:18px;"><span class="bar"></span><span>EXPERTISE</span></div>
+      <h2>공학과 보험,<br/><em>두 언어를 모두</em><br/><b>구사하는 검수.</b></h2>
+      <p>
+        손해사정 영문 보고서는 단순 번역이 아닙니다. 사고의 인과관계, 기계적 결함 매커니즘,
+        면·부책 판단 근거가 재보험사 관점에서 정확히 전달되어야 합니다.
+        블루워드의 2차 검수자는 호주 항공우주공학·기계공학과 보험학을 모두 전공한 도메인 전문가입니다.
+      </p>
+
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 22l10-19 10 19H2zM12 9v6M12 18.5v.1"/></svg></div>
+          <div>
+            <h5>기술 인과관계 정밀 기술</h5>
+            <p>화재·기계·구조 사고의 메커니즘을 공학적으로 정확히 영문화합니다.</p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <div>
+            <h5>면·부책 판단 표현</h5>
+            <p>약관 해석과 보상 범위 판단이 영문 보험 관행에 맞게 기술되도록 검수.</p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg></div>
+          <div>
+            <h5>이미지 내 한글 영문화</h5>
+            <p>도면·사진·표 안의 한글 라벨까지 별도 작업으로 영문 변환 가능.</p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+          <div>
+            <h5>재보험사 컴플레인 대응</h5>
+            <p>납품 후 재보험사로부터 추가 질의가 올 경우 후속 영문 대응까지 지원.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISUAL BAND — Fire / Infrastructure / Machinery ============ -->
+<section class="visband" data-screen-label="06 Visual Band">
+  <div class="visband-grid">
+    <div class="vbi">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80" alt="화재 현장 조사"/>
+      <div class="lab"><b>FIRE</b><small>Fire &amp; explosion claims</small>화재 사고 현장 조사</div>
+    </div>
+    <div class="vbi">
+      <img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1400&q=80" alt="산업 설비 / 인프라"/>
+      <div class="lab"><b>INFRASTRUCTURE</b><small>Industrial facility &amp; plants</small>산업 설비 · 플랜트</div>
+    </div>
+    <div class="vbi">
+      <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1400&q=80" alt="기계 설비"/>
+      <div class="lab"><b>MACHINERY</b><small>Mechanical breakdown</small>기계 손상 · 고장</div>
+    </div>
+  </div>
+  <div class="visband-cap">
+    화재·폭발·<b>산업설비</b>·<b>기계 사고</b>까지,<br/>
+    <em>공학적 이해</em>가 필요한 모든 케이스.
+  </div>
+</section>
+
+<!-- ============ DELIVERABLES ============ -->
+<section class="deliver" id="deliverables" data-screen-label="06 Deliverables">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-tag"><span class="bar"></span><span>DELIVERABLES</span></div>
+      <h2 class="section-title"><b>납품 가능한</b><br/>영문 <em>보고서 종류</em></h2>
+    </div>
+    <p class="section-desc" style="color:rgba(255,255,255,.6);max-width:480px;">
+      손해사정사가 작성하는 거의 모든 보고서 유형을 영문으로 변환합니다.
+      케이스에 맞춰 포맷을 그대로 유지하거나 글로벌 재보험사 포맷에 맞춰 재구성합니다.
+    </p>
+  </div>
+
+  <div class="deliver-grid">
+    <div class="dcard reveal">
+      <div class="doc-thumb" style="background-image:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)),url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80');background-size:cover;background-position:center;">
+        <div class="dh"><strong>FINAL ADJUSTMENT REPORT</strong><span>EN · 2025</span></div>
+        <div class="dl l"></div><div class="dl m"></div><div class="dl s"></div>
+        <div class="dimg" style="background:linear-gradient(135deg,#7f1d1d,#dc2626);"></div>
+        <div class="dl m"></div><div class="dl l"></div><div class="dl s"></div>
+      </div>
+      <h3>TYPE A</h3>
+      <h4>최종 손해사정 보고서</h4>
+      <p>사고 경위, 손해액 산정, 면·부책 판단을 모두 포함한 표준 종결 보고서. 가장 일반적인 의뢰 유형.</p>
+      <div class="meta"><span>10K CHARS BASE</span><span><b>7</b> DAYS</span></div>
+    </div>
+
+    <div class="dcard reveal">
+      <div class="doc-thumb">
+        <div class="dh"><strong>INTERIM REPORT</strong><span>EN · 2025</span></div>
+        <div class="dl l"></div><div class="dl s"></div>
+        <div class="dimg" style="background:linear-gradient(135deg,#475569,#0f172a);"></div>
+        <div class="dl m"></div><div class="dl l"></div>
+      </div>
+      <h3>TYPE B</h3>
+      <h4>현장 중간 종결 보고서</h4>
+      <p>사고 발생 직후 현장 조사 결과를 빠르게 전달하는 중간 보고서. 동일 사고 본 보고서와 함께 의뢰 시 할인.</p>
+      <div class="meta"><span>DISCOUNT WHEN PAIRED</span><span><b>5</b> BUSINESS DAYS</span></div>
+    </div>
+
+    <div class="dcard reveal">
+      <div class="doc-thumb">
+        <div class="dh"><strong>FAST TRACK REPORT</strong><span>EN · 48H</span></div>
+        <div class="dl l"></div><div class="dl m"></div>
+        <div class="dimg" style="background:linear-gradient(135deg,#fbbf24,#b08d57);"></div>
+        <div class="dl s"></div><div class="dl l"></div>
+      </div>
+      <h3>TYPE C</h3>
+      <h4>긴급 보고서</h4>
+      <p>마감이 임박한 급한 케이스 전용. 접수 후 2일 내 1차 피드백, 우선순위 큐로 진행.</p>
+      <div class="meta"><span>PRIORITY QUEUE</span><span><b>3</b> DAYS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="trust" data-screen-label="07 Trust">
+  <div class="trust-head reveal">
+    <span>TRUSTED BY DOMESTIC INSURERS &amp; GLOBAL REINSURERS</span>
+    <em>국내 손해보험사 및 해외 재보험사와의 협업 실적</em>
+  </div>
+  <div class="logo-row reveal">
+    <div class="logo-cell"><span>SAMSUNG <span class="dl">F &amp; M</span></span></div>
+    <div class="logo-cell"><span>HYUNDAI <span class="dl">M&amp;F</span></span></div>
+    <div class="logo-cell"><span>DB <span class="dl">Insurance</span></span></div>
+    <div class="logo-cell"><span>KB <span class="dl">손보</span></span></div>
+    <div class="logo-cell"><span>MUNICH <span class="dl">Re</span></span></div>
+    <div class="logo-cell"><span>SWISS <span class="dl">Re</span></span></div>
+    <div class="logo-cell"><span>LLOYD'S</span></div>
+    <div class="logo-cell"><span>HANNOVER <span class="dl">Re</span></span></div>
+    <div class="logo-cell"><span>SCOR</span></div>
+    <div class="logo-cell"><span>KOREAN <span class="dl">Re</span></span></div>
+    <div class="logo-cell"><span>AIG <span class="dl">Korea</span></span></div>
+    <div class="logo-cell"><span>CHUBB</span></div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testi" data-screen-label="08 Testimonials">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-tag"><span class="bar"></span><span>CLIENT VOICES</span></div>
+      <h2 class="section-title">실무자의 <em>인터뷰</em>로 듣는<br/><b>블루워드 사용기</b></h2>
+    </div>
+    <p class="section-desc">
+      손해사정 현업 담당자들이 평가하는 블루워드의 가장 큰 강점은 일관된 품질과 약속된 납기,
+      그리고 재보험사 후속 대응까지 책임지는 사후 관리입니다.
+    </p>
+  </div>
+
+  <div class="testi-grid">
+    <div class="tcard reveal">
+      <div class="tquote">2차 검수 단계에서 면·부책 표현이 명확해진 게 가장 큰 차이였어요. 재보험사에서 추가 질의가 거의 안 옵니다.</div>
+      <div class="tmeta">
+        <div class="tav">JK</div>
+        <div>
+          <div class="tnm">정 모 손해사정사</div>
+          <div class="trole">국내 대형 손보사 / 화재·재산 라인</div>
+        </div>
+        <div class="tstars">★★★★★</div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tquote">한글 보고서 포맷을 그대로 살려주는 게 의외로 큰 도움이었습니다. 재가공 시간이 거의 들지 않아요.</div>
+      <div class="tmeta">
+        <div class="tav">SH</div>
+        <div>
+          <div class="tnm">송 모 책임</div>
+          <div class="trole">독립 손해사정 법인 · 기업보험팀</div>
+        </div>
+        <div class="tstars">★★★★★</div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tquote">긴급 건도 정말 2일 안에 1차본이 옵니다. 마감이 빡빡한 클레임에서 블루워드는 거의 보험 같은 존재예요.</div>
+      <div class="tmeta">
+        <div class="tav">YR</div>
+        <div>
+          <div class="tnm">유 모 차장</div>
+          <div class="trole">외국계 보험사 한국지점 · 클레임팀</div>
+        </div>
+        <div class="tstars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" data-screen-label="09 FAQ">
+  <div class="faq-grid">
+    <div class="reveal">
+      <div class="section-tag"><span class="bar"></span><span>FAQ</span></div>
+      <h2 class="section-title" style="font-size:clamp(36px,4.6vw,56px);">자주 묻는<br/><em>질문</em>들</h2>
+      <p style="margin-top:24px;color:var(--mute);font-size:14px;line-height:1.8;max-width:380px;">
+        가격·납기·검수 프로세스에 대한 가장 흔한 질문들입니다.
+        여기에 없는 내용은 언제든 문의 폼으로 알려주세요.
+      </p>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-q"><span class="qno">01</span><span>견적은 어떻게 받을 수 있나요?</span><span class="qmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div>한글 원문 보고서를 메일 또는 문의 폼으로 전달해 주시면 24시간 이내 정확한 견적과 납기를 회신해 드립니다. 10,000자 기준 시장 최저가를 보장합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qno">02</span><span>중간 종결 보고서를 함께 의뢰하면 얼마나 할인되나요?</span><span class="qmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div>동일 사고에 대한 본 보고서와 중간 종결 보고서를 함께 의뢰하시면 패키지 기준 추가 할인이 적용됩니다. 정확한 할인율은 분량과 사고 유형에 따라 견적 시 확정됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qno">03</span><span>2차 검수자는 어떤 분이신가요?</span><span class="qmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div>호주에서 항공우주공학 &amp; 기계공학과 보험학을 모두 전공한 도메인 전문가가 모든 영문 보고서의 2차 검수를 담당합니다. 최근 3년간 재보험사로부터의 컴플레인은 0건입니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qno">04</span><span>보고서 안의 이미지 한글도 번역되나요?</span><span class="qmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div>옵션으로 제공됩니다. 사진·도면·표 안의 한글 라벨이나 주석을 영문으로 변환하여 이미지 자체를 교체해 드립니다. 견적 단계에서 이미지 수에 따라 별도 산정합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qno">05</span><span>긴급 건은 어떻게 진행되나요?</span><span class="qmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div>접수 시 ‘RUSH’로 표기해 주시면 우선순위 큐에 배정되어 평균 2일 이내 1차 피드백을 드립니다. 분량이 많거나 특수 사고일 경우 사전 협의가 필요할 수 있습니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qno">06</span><span>납품 후 재보험사에서 추가 질의가 오면요?</span><span class="qmark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="faq-a"><div>1회 무상 수정이 기본 포함되며, 재보험사 추가 문의에 대한 영문 후속 대응도 케이스별로 지원합니다. 장기 협업 클라이언트에는 전담 채널로 운영합니다.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" id="contact" data-screen-label="10 Contact">
+  <div class="cta-inner reveal">
+    <h2>다음 영문 보고서,<br/><b>블루워드</b>와 함께 <em>시작해 보세요.</em></h2>
+    <h3>“ Better English. Faster Reports. Zero Complaints. ”</h3>
+
+    <div class="cta-actions">
+      <a href="mailto:info@blueword.co.kr" class="btn-primary">
+        REQUEST A QUOTE
+        <span class="arrow">
+          <svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h20M16 1l5 4-5 4"/></svg>
+        </span>
+      </a>
+      <a href="#" class="btn-ghost">DOWNLOAD COMPANY PROFILE</a>
+    </div>
+
+    <div class="cta-strip">
+      <div class="csi">
+        <h5>EMAIL</h5>
+        <p>info@blueword.co.kr <em>· 24h reply</em></p>
+      </div>
+      <div class="csi">
+        <h5>PHONE</h5>
+        <p>+82 10-4982-4263 <em>· 평일 09:00–19:00</em></p>
+      </div>
+      <div class="csi">
+        <h5>FAST TRACK HOTLINE</h5>
+        <p>engkor114@gmail.com <em>· 24/7 monitored</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer data-screen-label="11 Footer">
+  <div class="foot-top">
+    <div>
+      <div class="foot-brand">
+        <img src="assets/blueword-logo.png" alt="BlueWord" class="foot-logo"/>
+        <small>since 2021</small>
+      </div>
+      <p class="foot-addr">
+        <strong>BlueWord CO., LTD.</strong>
+        손해사정 영문 보고서 전문 기업<br/>
+        서울특별시 강남구 테헤란로 ··· (사업장 주소)<br/>
+        Email. info@blueword.co.kr<br/>
+        Tel. +82 10-4982-4263
+      </p>
+    </div>
+    <div>
+      <h5>SERVICES</h5>
+      <ul>
+        <li><a href="#services">최종 손해사정 보고서</a></li>
+        <li><a href="#services">중간 종결 보고서</a></li>
+        <li><a href="#services">긴급 (Fast Track) 보고서</a></li>
+        <li><a href="#services">이미지 한글 번역</a></li>
+        <li><a href="#services">컴플레인 대응 지원</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#deliverables">Deliverables</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 BlueWord CO., LTD. All Rights Reserved.</span>
+    <div class="legal">
+      <a href="privacy.html">개인정보처리방침</a>
+      <a href="terms.html">이용약관</a>
+      <a href="#">사이트맵</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "accent": "#1d4ed8",
+  "navy": "#073762"
+}/*EDITMODE-END*/;
+
+document.documentElement.style.setProperty('--bw-accent', TWEAKS.accent);
+document.documentElement.style.setProperty('--bw-navy', TWEAKS.navy);
+
+/* ===== Nav scroll ===== */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ===== FAQ accordion ===== */
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+/* ===== Reveal on scroll ===== */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ===== Tweaks panel ===== */
+let tweaksMounted = false;
+window.addEventListener('message', (ev) => {
+  const t = ev.data && ev.data.type;
+  if (t === '__activate_edit_mode'){ mountTweaks(); }
+  if (t === '__deactivate_edit_mode'){ unmountTweaks(); }
+});
+window.parent.postMessage({type:'__edit_mode_available'}, '*');
+
+function setTweak(key, val){
+  TWEAKS[key] = val;
+  if (key === 'accent') document.documentElement.style.setProperty('--bw-accent', val);
+  if (key === 'navy') document.documentElement.style.setProperty('--bw-navy', val);
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{[key]:val}}, '*');
+}
+
+function mountTweaks(){
+  if (tweaksMounted) return;
+  tweaksMounted = true;
+  const el = document.createElement('div');
+  el.id = 'tweaks-panel';
+  el.style.cssText = `
+    position:fixed;right:24px;bottom:24px;z-index:200;
+    width:300px;background:#fff;color:#111;border:1px solid #e6e6e6;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.25);
+    border-radius:14px;padding:18px;font-family:var(--kor);font-size:13px;
+  `;
+  el.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <strong style="font-family:var(--display);letter-spacing:.15em;font-size:12px;">TWEAKS</strong>
+      <button id="tw-close" style="background:none;border:0;cursor:pointer;color:#888;font-size:18px;">×</button>
+    </div>
+    <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
+      <span style="font-size:11px;letter-spacing:.15em;color:#888;text-transform:uppercase;">Accent color</span>
+      <div style="display:flex;gap:6px;">
+        ${['#1d4ed8','#0a2540','#0f766e','#b91c1c','#7c3aed'].map(c=>`<button data-acc="${c}" style="width:32px;height:32px;border-radius:50%;border:2px solid ${c===TWEAKS.accent?'#111':'transparent'};background:${c};cursor:pointer;"></button>`).join('')}
+      </div>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:6px;">
+      <span style="font-size:11px;letter-spacing:.15em;color:#888;text-transform:uppercase;">Brand navy</span>
+      <div style="display:flex;gap:6px;">
+        ${['#0a1f44','#0a0e1a','#111827','#1e3a5f','#0f172a'].map(c=>`<button data-navy="${c}" style="width:32px;height:32px;border-radius:50%;border:2px solid ${c===TWEAKS.navy?'#111':'transparent'};background:${c};cursor:pointer;"></button>`).join('')}
+      </div>
+    </label>
+  `;
+  document.body.appendChild(el);
+  el.querySelector('#tw-close').onclick = ()=>{
+    unmountTweaks();
+    window.parent.postMessage({type:'__edit_mode_dismissed'}, '*');
+  };
+  el.querySelectorAll('[data-acc]').forEach(b=>{
+    b.onclick = ()=>{
+      setTweak('accent', b.dataset.acc);
+      el.querySelectorAll('[data-acc]').forEach(x=>x.style.borderColor='transparent');
+      b.style.borderColor = '#111';
+    };
+  });
+  el.querySelectorAll('[data-navy]').forEach(b=>{
+    b.onclick = ()=>{
+      setTweak('navy', b.dataset.navy);
+      el.querySelectorAll('[data-navy]').forEach(x=>x.style.borderColor='transparent');
+      b.style.borderColor = '#111';
+    };
+  });
+}
+function unmountTweaks(){
+  const el = document.getElementById('tweaks-panel');
+  if (el) el.remove();
+  tweaksMounted = false;
+}
+</script>
+</body>
+</html>

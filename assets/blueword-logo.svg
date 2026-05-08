@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 918 420" role="img" aria-label="BlueWord">
+  <title>BlueWord</title>
+  <rect x="0" y="0" width="918" height="420" fill="#073762"></rect>
+  <path d="M 29 178 L 29 28 L 826 28" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="butt" stroke-linejoin="miter"></path>
+  <path d="M 86 392 L 892 392 L 892 264" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="butt" stroke-linejoin="miter"></path>
+  <text x="40" y="362" font-family="&#39;Archivo Black&#39;,&#39;Archivo&#39;,system-ui,-apple-system,sans-serif" font-weight="900" font-size="248" letter-spacing="-8" fill="#ffffff">BlueWord</text>
+</svg>

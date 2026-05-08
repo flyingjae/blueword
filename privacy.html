@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>개인정보처리방침 ㅣ BlueWord</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Archivo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0e1a; --mute:#6b7280; --line:#e6e8ee;
+    --bw-navy:#073762; --bw-accent:#1d4ed8; --paper:#f5f4ef;
+    --display:"Archivo",-apple-system,sans-serif;
+    --kor:"Pretendard",-apple-system,"Apple SD Gothic Neo",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#fff;color:var(--ink);font-family:var(--kor);-webkit-font-smoothing:antialiased;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}
+  a:hover{color:var(--bw-accent);}
+  .topnav{
+    position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:10;
+    padding:18px 48px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .topnav .brand{display:flex;align-items:center;gap:12px;}
+  .topnav .brand img{height:32px;}
+  .topnav .brand small{font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);font-weight:600;}
+  .topnav .back{font-family:var(--display);font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--bw-navy);display:flex;align-items:center;gap:10px;}
+
+  .hero{
+    background:var(--bw-navy);color:#fff;padding:100px 48px 80px;
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse at 70% 100%,black,transparent 80%);
+  }
+  .hero-inner{position:relative;z-index:2;max-width:1100px;}
+  .crumb{font-family:var(--display);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:20px;}
+  .crumb a{color:rgba(255,255,255,.85);}
+  .hero h1{font-family:var(--display);font-weight:300;font-size:clamp(40px,5vw,68px);line-height:1.05;letter-spacing:-0.03em;}
+  .hero h1 b{font-weight:800;}
+  .hero p{margin-top:20px;color:rgba(255,255,255,.75);font-size:15px;max-width:640px;}
+
+  main{max-width:880px;margin:0 auto;padding:80px 48px 120px;}
+  main .meta{
+    font-family:var(--display);font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--mute);padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:48px;
+  }
+  main .meta b{color:var(--ink);font-weight:700;}
+
+  main h2{
+    font-family:var(--kor);font-weight:700;font-size:22px;letter-spacing:-0.01em;color:var(--ink);
+    margin-top:56px;margin-bottom:18px;display:flex;gap:14px;align-items:baseline;
+  }
+  main h2 .n{font-family:var(--display);font-weight:800;color:var(--bw-accent);font-size:14px;letter-spacing:.1em;}
+  main h2:first-of-type{margin-top:0;}
+  main p{color:#374151;font-size:15px;line-height:1.85;margin-bottom:14px;}
+  main ul, main ol{margin:14px 0 20px 24px;color:#374151;font-size:15px;line-height:1.85;}
+  main li{margin-bottom:8px;}
+  main strong{color:var(--ink);font-weight:600;}
+
+  .callout{
+    background:var(--paper);border-left:3px solid var(--bw-accent);
+    padding:24px 28px;margin:32px 0;border-radius:4px;
+    font-size:14px;line-height:1.8;color:#374151;
+  }
+  .callout strong{display:block;margin-bottom:6px;color:var(--ink);font-family:var(--display);font-size:11px;letter-spacing:.25em;text-transform:uppercase;font-weight:700;}
+
+  .contact-card{
+    margin-top:60px;padding:32px 36px;background:#f8fafc;border:1px solid var(--line);border-radius:14px;
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  }
+  .contact-card h5{font-family:var(--display);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--mute);font-weight:700;margin-bottom:6px;}
+  .contact-card p{font-family:var(--display);font-weight:600;font-size:16px;color:var(--bw-navy);margin:0;}
+
+  footer{background:#03182d;color:rgba(255,255,255,.6);padding:36px 48px;font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+  footer .legal{display:flex;gap:24px;}
+  footer a:hover{color:#fff;}
+
+  @media(max-width:720px){
+    .topnav,.hero,main,footer{padding-left:24px;padding-right:24px;}
+    .contact-card{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="index.html" class="brand">
+    <img src="assets/blueword-logo.png" alt="BlueWord"/>
+    <small>since 2021</small>
+  </a>
+  <a href="index.html" class="back">
+    <svg width="14" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 5H1M6 1L1 5l5 4"/></svg>
+    BACK TO HOME
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="crumb"><a href="index.html">HOME</a> &nbsp;／&nbsp; LEGAL &nbsp;／&nbsp; PRIVACY POLICY</div>
+    <h1>개인정보 <b>처리방침</b></h1>
+    <p>BlueWord(이하 "회사")는 정보주체의 개인정보를 중요시하며, 「개인정보 보호법」 및 관련 법령을 준수하기 위해 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
+  </div>
+</section>
+
+<main>
+  <div class="meta">시행일자 <b>2025년 1월 1일</b> &nbsp;·&nbsp; 최종 개정 <b>2025년 1월 1일</b></div>
+
+  <h2><span class="n">01</span>개인정보의 처리 목적</h2>
+  <p>회사는 다음의 목적을 위하여 개인정보를 처리하며, 이용 목적이 변경될 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행합니다.</p>
+  <ul>
+    <li>손해사정 영문 보고서 작성·검수·납품 등 서비스 제공</li>
+    <li>견적 문의, 계약 체결 및 이행, 요금 정산</li>
+    <li>고객 식별, 본인 확인, 부정 이용 방지</li>
+    <li>고객 문의 대응, 공지사항 전달, 고충 처리</li>
+  </ul>
+
+  <h2><span class="n">02</span>처리하는 개인정보 항목</h2>
+  <p>회사는 다음의 개인정보 항목을 처리하고 있습니다.</p>
+  <ul>
+    <li><strong>필수항목</strong> — 회사명/소속, 담당자 성명, 이메일, 연락처</li>
+    <li><strong>선택항목</strong> — 직책, 추가 연락 수단</li>
+    <li><strong>자동 수집</strong> — 접속 IP, 쿠키, 서비스 이용 기록, 브라우저 정보</li>
+  </ul>
+
+  <h2><span class="n">03</span>개인정보의 처리 및 보유기간</h2>
+  <p>회사는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 보유·이용기간 내에서 개인정보를 처리·보유합니다.</p>
+  <ul>
+    <li>견적/문의 처리 — 처리 완료 후 1년</li>
+    <li>계약 및 청약철회 등에 관한 기록 — 5년 (전자상거래법)</li>
+    <li>대금결제 및 재화 등의 공급에 관한 기록 — 5년 (전자상거래법)</li>
+    <li>소비자의 불만 또는 분쟁처리에 관한 기록 — 3년 (전자상거래법)</li>
+  </ul>
+
+  <h2><span class="n">04</span>개인정보의 제3자 제공</h2>
+  <p>회사는 정보주체의 개인정보를 본 방침의 처리 목적 범위 내에서만 처리하며, 정보주체의 동의, 법률의 특별한 규정 등 「개인정보 보호법」 제17조 및 제18조에 해당하는 경우에만 개인정보를 제3자에게 제공합니다.</p>
+
+  <h2><span class="n">05</span>개인정보처리의 위탁</h2>
+  <p>회사는 원활한 서비스 제공을 위하여 다음과 같이 개인정보 처리 업무를 위탁할 수 있으며, 위탁계약 체결 시 「개인정보 보호법」 제26조에 따라 위탁업무 수행 목적 외 개인정보 처리 금지, 기술적·관리적 보호조치 등을 명시합니다.</p>
+
+  <h2><span class="n">06</span>정보주체의 권리·의무 및 행사방법</h2>
+  <p>정보주체는 회사에 대해 언제든지 다음 각 호의 권리를 행사할 수 있습니다.</p>
+  <ol>
+    <li>개인정보 열람 요구</li>
+    <li>오류 등이 있을 경우 정정 요구</li>
+    <li>삭제 요구</li>
+    <li>처리정지 요구</li>
+  </ol>
+  <p>위 권리 행사는 회사에 대해 서면, 전자우편 등을 통하여 하실 수 있으며, 회사는 이에 대해 지체 없이 조치하겠습니다.</p>
+
+  <h2><span class="n">07</span>개인정보의 안전성 확보 조치</h2>
+  <ul>
+    <li>관리적 조치 — 내부관리계획 수립·시행, 정기적 직원 교육</li>
+    <li>기술적 조치 — 접근권한 관리, 접근통제시스템 설치, 고유식별정보 등의 암호화, 보안프로그램 설치</li>
+    <li>물리적 조치 — 전산실, 자료보관실 등의 접근통제</li>
+  </ul>
+
+  <h2><span class="n">08</span>개인정보 보호책임자</h2>
+  <p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+
+  <div class="contact-card">
+    <div>
+      <h5>개인정보 보호책임자</h5>
+      <p>BlueWord 운영팀</p>
+    </div>
+    <div>
+      <h5>이메일</h5>
+      <p>info@blueword.co.kr</p>
+    </div>
+    <div>
+      <h5>연락처</h5>
+      <p>+82 10-4982-4263</p>
+    </div>
+    <div>
+      <h5>운영시간</h5>
+      <p>평일 09:00 — 19:00</p>
+    </div>
+  </div>
+
+  <h2><span class="n">09</span>방침의 변경</h2>
+  <p>이 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.</p>
+
+  <div class="callout">
+    <strong>NOTICE</strong>
+    본 개인정보처리방침은 BlueWord의 손해사정 영문 보고서 서비스 운영 전반에 적용됩니다.
+    구체적인 개별 계약사항은 각 클라이언트와 별도 체결한 NDA 및 서비스 계약서에 따릅니다.
+  </div>
+</main>
+
+<footer>
+  <span>© 2025 BlueWord CO., LTD. All Rights Reserved.</span>
+  <div class="legal">
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="terms.html">이용약관</a>
+  </div>
+</footer>
+</body>
+</html>
