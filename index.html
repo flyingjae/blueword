@@ -607,6 +607,13 @@
   @media (max-width: 640px){
     .pillar-grid, .process-grid, .hero-bottom{grid-template-columns:1fr;}
     .pillar{border-right:0;}
+    /* Mobile nav: hide "since 2021" tagline and tighten lang switcher so KOR/ENG doesn't collide with the logo */
+    .brand small{display:none;}
+    .nav-right{gap:10px;}
+    .lang{font-size:11px;letter-spacing:.08em;gap:6px;}
+    .quote-cta{padding:9px 14px;font-size:11px;letter-spacing:.12em;}
+    /* Visband caption: tighter font + safe wrap on narrow screens */
+    .visband-cap{font-size:24px;line-height:1.25;width:calc(100% - 40px);}
     .hb-stat{border-right:0;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:20px;}
     .logo-row{grid-template-columns:repeat(2,1fr);}
     .foot-top{grid-template-columns:1fr;}
@@ -953,8 +960,8 @@
     </div>
   </div>
   <div class="visband-cap">
-    화재·폭발·<b>산업설비</b>·<b>기계&nbsp;사고</b>까지,<br/>
-    <em>공학적&nbsp;이해</em>가 필요한 모든 케이스.
+    화재·폭발·<b>산업설비</b>·<b>기계 사고</b>까지,<br/>
+    <em>공학적 이해</em>가 필요한 모든 케이스.
   </div>
 </section>
 
