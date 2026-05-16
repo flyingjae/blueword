@@ -615,7 +615,7 @@
 <body>
 
 <!-- ============ NAV ============ -->
-<header class="nav" id="nav" data-screen-label="Nav">
+<header class="nav" id="nav">
   <a href="#" class="brand" aria-label="Blueword home">
     <img src="assets/blueword-logo.png" alt="BlueWord" class="brand-logo"/>
     <small>since 2021</small>
@@ -648,7 +648,7 @@
 </header>
 
 <!-- ============ HERO ============ -->
-<section class="hero" data-screen-label="01 Hero">
+<section class="hero">
   <div class="hero-bg"></div>
 
   <div class="hero-top">
@@ -710,7 +710,7 @@
 </section>
 
 <!-- ============ 4 PILLARS ============ -->
-<section class="pillars section-pad" id="services" data-screen-label="02 Pillars">
+<section class="pillars section-pad" id="services">
   <div class="section-head reveal">
     <div>
       <div class="section-tag"><span class="bar"></span><span>WHY BlueWord</span></div>
@@ -774,7 +774,7 @@
 </section>
 
 <!-- ============ PRICING ============ -->
-<section class="price-band" data-screen-label="03 Pricing">
+<section class="price-band">
   <div class="price-grid">
     <div class="reveal">
       <div class="section-tag"><span class="bar"></span><span>MARKET-LOWEST PRICING</span></div>
@@ -810,7 +810,7 @@
 </section>
 
 <!-- ============ PROCESS ============ -->
-<section class="process section-pad" id="process" data-screen-label="04 Process">
+<section class="process section-pad" id="process">
   <div class="section-head reveal">
     <div>
       <div class="section-tag"><span class="bar"></span><span>OUR PROCESS</span></div>
@@ -873,7 +873,7 @@
 </section>
 
 <!-- ============ EXPERTISE ============ -->
-<section class="expertise section-pad" id="expertise" data-screen-label="05 Expertise">
+<section class="expertise section-pad" id="expertise">
   <div class="exp-grid">
     <div class="exp-visual reveal">
       <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=1400&q=80" alt="산업 기계 손상 조사 현장"/>
@@ -934,7 +934,7 @@
 </section>
 
 <!-- ============ VISUAL BAND — Fire / Infrastructure / Machinery ============ -->
-<section class="visband" data-screen-label="06 Visual Band">
+<section class="visband">
   <div class="visband-grid">
     <div class="vbi">
       <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80" alt="화재 현장 조사"/>
@@ -956,7 +956,7 @@
 </section>
 
 <!-- ============ DELIVERABLES ============ -->
-<section class="deliver" id="deliverables" data-screen-label="06 Deliverables">
+<section class="deliver" id="deliverables">
   <div class="section-head reveal">
     <div>
       <div class="section-tag"><span class="bar"></span><span>DELIVERABLES</span></div>
@@ -1011,7 +1011,7 @@
 </section>
 
 <!-- ============ TRUST ============ -->
-<section class="trust" data-screen-label="07 Trust">
+<section class="trust">
   <div class="trust-head reveal">
     <span>TRUSTED BY DOMESTIC INSURERS &amp; GLOBAL REINSURERS</span>
     <em>국내 손해보험사 및 해외 재보험사와의 협업 실적</em>
@@ -1033,7 +1033,7 @@
 </section>
 
 <!-- ============ TESTIMONIALS ============ -->
-<section class="testi" data-screen-label="08 Testimonials">
+<section class="testi">
   <div class="section-head reveal">
     <div>
       <div class="section-tag"><span class="bar"></span><span>CLIENT VOICES</span></div>
@@ -1083,7 +1083,7 @@
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="faq" data-screen-label="09 FAQ">
+<section class="faq">
   <div class="faq-grid">
     <div class="reveal">
       <div class="section-tag"><span class="bar"></span><span>FAQ</span></div>
@@ -1124,7 +1124,7 @@
 </section>
 
 <!-- ============ CTA ============ -->
-<section class="cta" id="contact" data-screen-label="10 Contact">
+<section class="cta" id="contact">
   <div class="cta-inner reveal">
     <h2>다음 영문 보고서,<br/><b>블루워드</b>와 함께 <em>시작해 보세요.</em></h2>
     <h3>“ Better English. Faster Reports. Zero Complaints. ”</h3>
@@ -1157,7 +1157,7 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer data-screen-label="11 Footer">
+<footer>
   <div class="foot-top">
     <div>
       <div class="foot-brand">
@@ -1201,14 +1201,6 @@
 </footer>
 
 <script>
-const TWEAKS = /*EDITMODE-BEGIN*/{
-  "accent": "#1d4ed8",
-  "navy": "#073762"
-}/*EDITMODE-END*/;
-
-document.documentElement.style.setProperty('--bw-accent', TWEAKS.accent);
-document.documentElement.style.setProperty('--bw-navy', TWEAKS.navy);
-
 /* ===== Nav scroll ===== */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -1217,7 +1209,9 @@ window.addEventListener('scroll', () => {
 
 /* ===== FAQ accordion ===== */
 document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('.faq-q').addEventListener('click', () => {
+  const q = item.querySelector('.faq-q');
+  if (!q) return;
+  q.addEventListener('click', () => {
     const open = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
     if (!open) item.classList.add('open');
@@ -1229,77 +1223,6 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-/* ===== Tweaks panel ===== */
-let tweaksMounted = false;
-window.addEventListener('message', (ev) => {
-  const t = ev.data && ev.data.type;
-  if (t === '__activate_edit_mode'){ mountTweaks(); }
-  if (t === '__deactivate_edit_mode'){ unmountTweaks(); }
-});
-window.parent.postMessage({type:'__edit_mode_available'}, '*');
-
-function setTweak(key, val){
-  TWEAKS[key] = val;
-  if (key === 'accent') document.documentElement.style.setProperty('--bw-accent', val);
-  if (key === 'navy') document.documentElement.style.setProperty('--bw-navy', val);
-  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{[key]:val}}, '*');
-}
-
-function mountTweaks(){
-  if (tweaksMounted) return;
-  tweaksMounted = true;
-  const el = document.createElement('div');
-  el.id = 'tweaks-panel';
-  el.style.cssText = `
-    position:fixed;right:24px;bottom:24px;z-index:200;
-    width:300px;background:#fff;color:#111;border:1px solid #e6e6e6;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.25);
-    border-radius:14px;padding:18px;font-family:var(--kor);font-size:13px;
-  `;
-  el.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-      <strong style="font-family:var(--display);letter-spacing:.15em;font-size:12px;">TWEAKS</strong>
-      <button id="tw-close" style="background:none;border:0;cursor:pointer;color:#888;font-size:18px;">×</button>
-    </div>
-    <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
-      <span style="font-size:11px;letter-spacing:.15em;color:#888;text-transform:uppercase;">Accent color</span>
-      <div style="display:flex;gap:6px;">
-        ${['#1d4ed8','#0a2540','#0f766e','#b91c1c','#7c3aed'].map(c=>`<button data-acc="${c}" style="width:32px;height:32px;border-radius:50%;border:2px solid ${c===TWEAKS.accent?'#111':'transparent'};background:${c};cursor:pointer;"></button>`).join('')}
-      </div>
-    </label>
-    <label style="display:flex;flex-direction:column;gap:6px;">
-      <span style="font-size:11px;letter-spacing:.15em;color:#888;text-transform:uppercase;">Brand navy</span>
-      <div style="display:flex;gap:6px;">
-        ${['#0a1f44','#0a0e1a','#111827','#1e3a5f','#0f172a'].map(c=>`<button data-navy="${c}" style="width:32px;height:32px;border-radius:50%;border:2px solid ${c===TWEAKS.navy?'#111':'transparent'};background:${c};cursor:pointer;"></button>`).join('')}
-      </div>
-    </label>
-  `;
-  document.body.appendChild(el);
-  el.querySelector('#tw-close').onclick = ()=>{
-    unmountTweaks();
-    window.parent.postMessage({type:'__edit_mode_dismissed'}, '*');
-  };
-  el.querySelectorAll('[data-acc]').forEach(b=>{
-    b.onclick = ()=>{
-      setTweak('accent', b.dataset.acc);
-      el.querySelectorAll('[data-acc]').forEach(x=>x.style.borderColor='transparent');
-      b.style.borderColor = '#111';
-    };
-  });
-  el.querySelectorAll('[data-navy]').forEach(b=>{
-    b.onclick = ()=>{
-      setTweak('navy', b.dataset.navy);
-      el.querySelectorAll('[data-navy]').forEach(x=>x.style.borderColor='transparent');
-      b.style.borderColor = '#111';
-    };
-  });
-}
-function unmountTweaks(){
-  const el = document.getElementById('tweaks-panel');
-  if (el) el.remove();
-  tweaksMounted = false;
-}
 </script>
 </body>
 </html>
